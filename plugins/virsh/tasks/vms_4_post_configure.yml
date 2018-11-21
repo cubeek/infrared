@@ -12,6 +12,13 @@
   with_items: "{{ groups.all }}"
   when: provision.topology.extend | default(False)
 
+- name: install node dependencies if any
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ node.dependencies }}"
+  when: node.dependencies is defined
+
 - name: "configure {{ topology_node.os.type }} switch"
   include_tasks: "tasks/configure_{{ topology_node.os.type }}_switch.yml"
   when: topology_node.os.type in infrared_vswitch_types

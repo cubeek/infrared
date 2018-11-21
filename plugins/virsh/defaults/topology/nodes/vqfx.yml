@@ -22,6 +22,8 @@ disks:
     bus: ide
 # infraces and external_network dicts were moved to network file.
 interfaces: null
+dependencies:
+  - expect
 
 groups:
   - vswitches
